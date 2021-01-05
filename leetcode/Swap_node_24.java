@@ -21,18 +21,22 @@ public class Swap_node_24 {
 	
 
     //使用递归，第三层中该层的head=null，返回给第二层的head.next，相当于后面没有了 ，然后第二层的next.next指向第二层的head，相当于掉头了。
-    //然后返回第二层的next，第一层的head.next指向第二层传来的next，第一层的next.next指向第一层的head，最终返回next。
+    //接上。然后返回第二层的next，第一层的head.next指向第二层传来的next，第一层的next.next指向第一层的head，最终返回next。
+    // 递归的最小重复是：将上层的head末尾接null，然后然两个节点翻转。返回翻转好的头节点。
 	public Swap_node_24 swapPairs(Swap_node_24 head) {
-		
+		//递归终结条件
         if(head == null || head.next == null){
             return head;
         }
+        //处理当前层
+        Swap_node_24 next = head.next;                    //这里就是选定了两个节点
+        //进入下一层
+        head.next = swapPairs(next.next);                 //依次选下面两个节点  ，最底层终结时给上层的head节点接null
         
-        Swap_node_24 next = head.next;
-        head.next = swapPairs(next.next);
-        next.next = head;
+        //处理上层
+        next.next = head;                                 //上层节点翻转
         
-        return next;
+        return next;                                     // 然后返回翻转后新的头节点
 
 	}
 	

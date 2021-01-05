@@ -1,6 +1,11 @@
 package leetcode;
 
-import book_java_data.return_k_th;
+/***
+ * 
+ * 
+ * @author huangpan  use recursion
+ *
+ */
 
 public class Swap_node_24 {
 	public int value;
@@ -14,16 +19,16 @@ public class Swap_node_24 {
     	this.next = next;
     }
 	
-    int i=0;
+
+    //使用递归，第三层中该层的head=null，返回给第二层的head.next，相当于后面没有了 ，然后第二层的next.next指向第二层的head，相当于掉头了。
+    //然后返回第二层的next，第一层的head.next指向第二层传来的next，第一层的next.next指向第一层的head，最终返回next。
 	public Swap_node_24 swapPairs(Swap_node_24 head) {
 		
         if(head == null || head.next == null){
             return head;
         }
         
-        i++;
         Swap_node_24 next = head.next;
-        System.out.println("该层是: "+i);
         head.next = swapPairs(next.next);
         next.next = head;
         
